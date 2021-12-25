@@ -1,0 +1,26 @@
+==> attempt_1_threads_2 <==
+TOTAL TIME: 0,12386
+
+==> attempt_1_threads_3 <==
+TOTAL TIME: 0,05528
+
+==> attempt_1_threads_4 <==
+TOTAL TIME: 0,06894
+
+==> attempt_2_threads_2 <==
+TOTAL TIME: 0,09929
+
+==> attempt_2_threads_3 <==
+TOTAL TIME: 0,06037
+
+==> attempt_2_threads_4 <==
+TOTAL TIME: 0,07553
+
+==> attempt_3_threads_2 <==
+TOTAL TIME: 0,11193
+
+==> attempt_3_threads_3 <==
+TOTAL TIME: 0,07020
+
+==> attempt_3_threads_4 <==
+TOTAL TIME: 0,05466

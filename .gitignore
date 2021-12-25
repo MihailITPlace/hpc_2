@@ -1,0 +1,15 @@
+/cmake-build-debug/
+/results-200/
+/attempt_1_threads_4
+/venv/
+/attempt_1_threads_3
+/attempt_1_threads_2
+/attempt_2_threads_2
+/attempt_2_threads_3
+/attempt_2_threads_4
+/attempt_3_threads_2
+/attempt_3_threads_3
+/attempt_3_threads_4
+/.idea/
+/inputs/matrix-*
+/inputs/vector-*
