@@ -36,8 +36,8 @@ void run_master(int matrix_size, int world_size) {
     sprintf(matrix_path, "../inputs/matrix-%d", matrix_size);
     sprintf(vector_path, "../inputs/vector-%d", matrix_size);
 
-    double *v = vector_from_file("/home/michael/CLionProjects/hpc_2/inputs/vector-3000", matrix_size);
-    double *m = vector_from_file("/home/michael/CLionProjects/hpc_2/inputs/matrix-3000", matrix_size * matrix_size);
+    double *v = vector_from_file("/home/michael/CLionProjects/hpc_2/inputs/vector-200", matrix_size);
+    double *m = vector_from_file("/home/michael/CLionProjects/hpc_2/inputs/matrix-200", matrix_size * matrix_size);
 
 
     double start = MPI_Wtime();
@@ -45,6 +45,7 @@ void run_master(int matrix_size, int world_size) {
     int lines_in_batch = matrix_size / workers_count;
     int batch_size = matrix_size * lines_in_batch;
 
+    //MPI_Bcast(v, matrix_size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     for (int i = 0; i < workers_count - 1; i++) {
         send_data_to_worker(i + 1, &m[i * batch_size], batch_size, v, matrix_size);
     }
@@ -62,7 +63,6 @@ void run_master(int matrix_size, int world_size) {
               MPI_COMM_WORLD, &workers_requests[workers_count - 1]);
 
     MPI_Waitall(workers_count, workers_requests, MPI_STATUSES_IGNORE);
-    double end = MPI_Wtime();
 
     printf("ANSWER:\n");
     show_matrix(product, matrix_size, 1);
@@ -99,6 +99,7 @@ void run_worker(int rank, int matrix_size) {
     MPI_Irecv(m, batch_size, MPI_DOUBLE, MPI_ANY_SOURCE, 1, MPI_COMM_WORLD, &master_requests[0]);
 
     double *v = malloc(sizeof(double) * matrix_size);
+    //MPI_Bcast(v, matrix_size, MPI_DOUBLE, 0, MPI_COMM_WORLD);
     MPI_Irecv(v, matrix_size, MPI_DOUBLE, MPI_ANY_SOURCE, 2, MPI_COMM_WORLD, &master_requests[1]);
 
     MPI_Waitall(2, master_requests, MPI_STATUSES_IGNORE);
@@ -123,8 +124,7 @@ int main(int argc, char **argv) {
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    char *end;
-    int matrix_size = 3000;//(int) strtol(argv[1], &end, 10);
+    int matrix_size = 200;
 
 
     if (rank == 0) {
